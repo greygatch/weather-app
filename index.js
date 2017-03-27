@@ -3,11 +3,11 @@ import request from 'request-promise';
 import { wuKey } from './config';
 
 function handleError(err) {
-  console.log(`Today is ${new Date().toLocaleString()}`);
   console.log(err);
 }
 
 function handleResponse(res) {
+  console.log(`Today is ${new Date().toLocaleString()}`);
   console.log(res);
 }
 
