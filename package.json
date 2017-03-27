@@ -5,8 +5,12 @@
   "repository": {},
   "author": "Evan Gatchell <greygatch@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "babel-node index.js | ./node_modules/.bin/bunyan"
+  },
   "devDependencies": {
-    "babel-preset-es2015": "^6.22.0"
+    "babel-preset-es2015": "^6.22.0",
+    "bunyan": "^1.8.9"
   },
   "dependencies": {
     "request": "^2.81.0",

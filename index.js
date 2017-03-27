@@ -1,6 +1,9 @@
 import util from 'util';
+import bunyan from 'bunyan';
 import request from 'request-promise';
 import { wuKey } from './config';
+
+const log = bunyan.createLogger({name: 'weather-app'});
 
 const wuFeatures = [
   'alerts',
@@ -17,13 +20,13 @@ const wuFeatures = [
 ];
 
 function handleError(err) {
-  console.log(err);
+  log.info(err);
 }
 
 function handleResponse(data) {
   const parsedData = JSON.parse(data);
-  console.log(`Today is ${new Date().toLocaleString()}`);
-  console.log(parsedData.forecast.simpleforecast);
+  log.info(`Today is ${new Date().toLocaleString()}`);
+  log.info(parsedData.forecast.simpleforecast);
 }
 
 function formatCity(str) {
