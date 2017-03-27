@@ -22,7 +22,7 @@ function formatState(str) {
 function getWeatherData(type, city, state) {
   const formattedCity = formatCity(city);
   const formattedState = formatState(state);
-  console.log(formattedCity, formattedState);
+
   request(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`)
     .then(handleResponse)
     .catch(handleError);
