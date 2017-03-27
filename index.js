@@ -1,6 +1,19 @@
-
 import request from 'request-promise';
 import { wuKey } from './config';
+
+const wuFeatures = [
+  'alerts',
+  'conditions',
+  'currenthurricane',
+  'forecast',
+  'forecast10day',
+  'geolookup',
+  'hourly',
+  'hourly10day',
+  'planner',
+  'rawtide',
+  'tide'
+];
 
 function handleError(err) {
   console.log(err);
@@ -23,7 +36,7 @@ async function getWeatherData(type, city, state) {
   const formattedCity = formatCity(city);
   const formattedState = formatState(state);
 
-  try{
+  try {
     const data = await request(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`);
     handleResponse(data);
   } catch(err) {
@@ -32,4 +45,4 @@ async function getWeatherData(type, city, state) {
 
 }
 
-getWeatherData('forecast', 'san francisco', 'ca')
+getWeatherData(wuFeatures[3], 'san francisco', 'ca')
