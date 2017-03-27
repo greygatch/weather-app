@@ -1,3 +1,4 @@
+import util from 'util';
 import request from 'request-promise';
 import { wuKey } from './config';
 
@@ -20,8 +21,9 @@ function handleError(err) {
 }
 
 function handleResponse(data) {
+  const parsedData = JSON.parse(data);
   console.log(`Today is ${new Date().toLocaleString()}`);
-  console.log(data);
+  console.log(parsedData.forecast.simpleforecast);
 }
 
 function formatCity(str) {
