@@ -6,9 +6,9 @@ function handleError(err) {
   console.log(err);
 }
 
-function handleResponse(res) {
+function handleResponse(data) {
   console.log(`Today is ${new Date().toLocaleString()}`);
-  console.log(res);
+  console.log(data);
 }
 
 function formatCity(str) {
@@ -19,13 +19,17 @@ function formatState(str) {
   return str.toUpperCase();
 }
 
-function getWeatherData(type, city, state) {
+async function getWeatherData(type, city, state) {
   const formattedCity = formatCity(city);
   const formattedState = formatState(state);
 
-  request(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`)
-    .then(handleResponse)
-    .catch(handleError);
+  try{
+    const data = await request(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`);
+    handleResponse(data);
+  } catch(err) {
+    handleError(err)
+  }
+
 }
 
 getWeatherData('forecast', 'san francisco', 'ca')
