@@ -2,9 +2,30 @@
 import request from 'request-promise';
 import { wuKey } from './config';
 
-console.log('wukey?', wuKey);
-request(`http://api.wunderground.com/api/${wuKey}/forecast10day/q/CA/San_Francisco.json`)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
+function handleError(err) {
+  console.log(`Today is ${new Date().toLocaleString()}`);
+  console.log(err);
+}
 
-// console.log(`Today is ${new Date().toLocaleString()}`);
+function handleResponse(res) {
+  console.log(res);
+}
+
+function formatCity(str) {
+  return str.toUpperCase().split(' ').join('_');
+}
+
+function formatState(str) {
+  return str.toUpperCase();
+}
+
+function getWeatherData(type, city, state) {
+  const formattedCity = formatCity(city);
+  const formattedState = formatState(state);
+  console.log(formattedCity, formattedState);
+  request(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`)
+    .then(handleResponse)
+    .catch(handleError);
+}
+
+getWeatherData('forecast', 'san francisco', 'ca')
