@@ -21,17 +21,6 @@ const wuFeatures = [
   'tide'
 ];
 
-// function handleError(err) {
-//   log.info(err);
-// }
-
-// function handleResponse(data) {
-//   const parsedData = JSON.parse(data);
-//   debugger;
-//   log.info(`Today is ${new Date().toLocaleString()}`);
-//   log.info(parsedData.forecast.simpleforecast);
-// }
-
 function formatCity(str) {
   return str.toUpperCase().split(' ').join('_');
 }
@@ -47,10 +36,8 @@ async function getWeatherData(request, reply) {
 
   try {
     const data = await rp(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`);
-    // handleResponse(data);
     reply(data);
   } catch(err) {
-    // handleError(err)
     reply('Error fetching data.');
   }
 
