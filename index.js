@@ -35,9 +35,10 @@ async function getWeatherData(request, reply) {
   const formattedState = formatState(state);
 
   try {
-    const data = await rp(`http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`);
-    reply(data);
-  } catch(err) {
+    const url = `http://api.wunderground.com/api/${wuKey}/${type}/q/${formattedState}/${formattedCity}.json`;
+    const data = await rp(url);
+    reply(JSON.parse(data)[type]);
+  } catch (err) {
     reply('Error fetching data.');
   }
 
